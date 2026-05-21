@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: villa-backend
+  namespace: default
 spec:
   replicas: 2
   selector:
@@ -15,5 +16,12 @@ spec:
       containers:
         - name: villa-backend
           image: santosh2585/villa-backend:8
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
           ports:
             - containerPort: 8086

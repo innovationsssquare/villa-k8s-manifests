@@ -3,6 +3,7 @@ kind: Ingress
 
 metadata:
   name: villa-backend-ingress
+  namespace: default
 
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
