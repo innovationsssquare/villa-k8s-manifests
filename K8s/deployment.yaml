@@ -20,9 +20,14 @@ spec:
     spec:
       containers:
         - name: villa-backend
-
-          image: santosh2585/villa-backend:8
-
+          image: santosh2585/villa-backend:9
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
           ports:
             - containerPort: 8086
 
