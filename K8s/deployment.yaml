@@ -1,30 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: villa-backend
   namespace: default
+
 spec:
   replicas: 2
+
   selector:
     matchLabels:
       app: villa-backend
+
   template:
     metadata:
       labels:
         app: villa-backend
+
     spec:
       containers:
         - name: villa-backend
+
           image: santosh2585/villa-backend:8
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "128Mi"
-            limits:
-              cpu: "250m"
-              memory: "256Mi"
+
           ports:
             - containerPort: 8086
+
           envFrom:
-               - secretRef:
-                 name: villa-backend-secret
+            - secretRef:
+                name: villa-backend-secret
