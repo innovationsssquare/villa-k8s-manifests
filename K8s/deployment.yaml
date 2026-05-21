@@ -25,3 +25,6 @@ spec:
               memory: "256Mi"
           ports:
             - containerPort: 8086
+          envFrom:
+               - secretRef:
+                 name: villa-backend-secret
