@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: villa-backend
-          image: santosh2585/villa-backend:23
+          image: santosh2585/villa-backend:24
           resources:
             requests:
               cpu: "100m"
