@@ -20,6 +20,6 @@ spec:
       serviceAccountName: villa-dev-sa
       containers:
         - name: villa-backend
-          image: santosh2585/villa-backend:dev-33
+          image: santosh2585/villa-backend:dev-34
           ports:
             - containerPort: 8086
