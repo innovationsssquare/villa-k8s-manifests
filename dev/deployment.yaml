@@ -3,31 +3,23 @@ kind: Deployment
 metadata:
   name: villa-backend
   namespace: dev
-
 spec:
   replicas: 2
-
   selector:
     matchLabels:
       app: villa-backend
-
   template:
     metadata:
       labels:
         app: villa-backend
-
       annotations:
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/role: "villa-dev-role"
         vault.hashicorp.com/agent-inject-secret-config: "secret/data/villa/dev"
-
     spec:
       serviceAccountName: villa-dev-sa
-
       containers:
-      - name: villa-backend
-
-        image: santosh2585/villa-backend:dev-1
-
-        ports:
-        - containerPort: 8086
+        - name: villa-backend
+          image: santosh2585/villa-backend:dev-33
+          ports:
+            - containerPort: 8086
