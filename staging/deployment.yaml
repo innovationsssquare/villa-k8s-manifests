@@ -26,7 +26,7 @@ spec:
       serviceAccountName: villa-staging-sa
       containers:
         - name: villa-backend
-          image: santosh2585/villa-backend:staging-43
+          image: santosh2585/villa-backend:staging-47
           imagePullPolicy: Always
           ports:
             - containerPort: 8086
