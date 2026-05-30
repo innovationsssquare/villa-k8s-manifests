@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: villa-backend
+  namespace: staging
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: villa-backend
+
+  template:
+    metadata:
+      labels:
+        app: villa-backend
+
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "villa-staging-role"
+        vault.hashicorp.com/agent-inject-secret-config: "secret/data/villa/staging"
+
+    spec:
+      serviceAccountName: villa-staging-sa
+
+      containers:
+      - name: villa-backend
+
+        image: santosh2585/villa-backend:staging-1
+
+        ports:
+        - containerPort: 8086

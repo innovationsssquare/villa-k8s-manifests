@@ -1,9 +1,8 @@
 apiVersion: v1
 kind: Service
-
 metadata:
   name: villa-backend-service
-  namespace: default
+  namespace: staging
 
 spec:
   selector:
@@ -13,4 +12,4 @@ spec:
   - port: 80
     targetPort: 8086
 
-  type: LoadBalancer
+  type: ClusterIP
