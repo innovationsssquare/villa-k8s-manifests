@@ -1,25 +1,62 @@
 apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: villa-backend
   namespace: dev
+
 spec:
   replicas: 2
+
   selector:
     matchLabels:
       app: villa-backend
+
   template:
     metadata:
       labels:
         app: villa-backend
+
       annotations:
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/role: "villa-dev-role"
+
         vault.hashicorp.com/agent-inject-secret-config: "secret/data/villa/dev"
+
+        vault.hashicorp.com/agent-inject-template-config: |
+          {{- with secret "secret/data/villa/dev" -}}
+          {{- range $k, $v := .Data.data }}
+          {{ $k }}="{{ $v }}"
+          {{- end }}
+          {{- end }}
+
     spec:
       serviceAccountName: villa-dev-sa
+
       containers:
         - name: villa-backend
           image: santosh2585/villa-backend:dev-34
+          imagePullPolicy: Always
+
           ports:
             - containerPort: 8086
+
+          command:
+            - /bin/sh
+            - -c
+
+          args:
+            - |
+              set -a
+              . /vault/secrets/config
+              set +a
+              node index.js
+
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
